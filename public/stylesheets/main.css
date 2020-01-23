@@ -1,0 +1,88 @@
+body {
+
+	
+}
+
+#page-container {
+	position: relative;
+	padding-top: 70px;
+	min-height: 100vh;
+}
+
+#content-wrap {
+	padding-bottom: 2.5rem;    /* Footer height */
+}
+
+img {
+width: 100%;
+	height: auto;
+	object-fit: cover;
+	display: block;
+}
+
+.card {
+	border-style: hidden;
+}
+
+.card-img-top {
+	width: 100%;
+	height: auto;
+	object-fit: cover;
+	display: block;
+	padding-bottom:10px;
+}
+
+.card-overlay {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: auto;
+	width: 100%;
+	opacity: 0;
+	transition: .5s ease;
+	background-color: #008CBA;
+	object-fit: cover;
+}
+
+.card:hover .card-img-top:{
+	opacity: 0.3;
+}
+
+.card:hover .card-overlay {
+	opacity: 0.7;
+}
+
+.card-overlay-text {
+	color: white;
+	font-size: 20px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	text-align: center;
+}
+
+input, textarea {
+	display: block;
+	padding: 5px;
+	margin: 10px;
+	border-radius: 7px;
+
+}
+
+.footer {
+	position: absolute;
+	height: 2.5rem;
+	width: 100%;
+	background-color: #F3F3F3;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin-bottom: 0;
+}
+
+
