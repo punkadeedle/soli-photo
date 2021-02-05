@@ -2,8 +2,11 @@ var express = require("express");
 var router = express.Router();
 var passport = require("passport");
 var User = require("../models/user");
+var Album = require("../models/album");
 var Image = require("../models/image");
+var Purchase = require("../models/purchase");
 const nodemailer = require("nodemailer");
+var middleware = require("../middleware");
 
 
 router.get("/", function(req, res){
@@ -99,6 +102,17 @@ router.get("/portfolio/:category", function(req, res){
 	});
 });
 
+router.get("/users/:id/album/:albumid", function(req, res){
+	Image.find({"belongsToAlbum.id": req.params.albumid}, function(err, allImages){
+		if(err){
+			console.log(err);
+		} else {
+			console.log(allImages);
+			res.render("albums/show",{images:allImages, currentUser_id:req.params.id});
+
+		}
+	});
+});
 
 router.get("/services", function(req, res){
 	res.render("services");
@@ -109,39 +123,9 @@ router.get("/contact", function(req, res){
 });
 
 
-router.post("/contact", sendMessage);
+router.post("/contact", middleware.sendMessage, function(req,res){
 
-function sendMessage(req, res) {
-	var transporter = nodemailer.createTransport({
-		host: "smtp.gmail.com",
-		secureConnection: true,
-		port: 465,
-		service: "gmail",
-		auth: {
-			user: process.env.NODEMAILER_ADDRESS,
-			pass: process.env.NODEMAILER_PASSKEY
-		}
-	})
-	var messageText = 'New contact messsage from <b>'+req.body.contact.name+"</b>: "+req.body.contact.message
-	var mailOptions = {
-		from: process.env.NODEMAILER_ADDRESS,
-		to: process.env.NODEMAILER_ADDRESS,
-		subject: "SolivagusPhoto- " + req.body.contact.subject,
-		//text: req.body.contact.message,
-		html: messageText
-	}
-	transporter.sendMail(mailOptions, function(error, info){
-		if(error){
-			console.log(error);
-			req.flash("error","There was a problem sending you message.  Please try again later.");
-			res.redirect("/contact");
-		} else {
-			req.flash("success","Thank you for your message.");
-			res.redirect("/contact");
-		}
-	})
-	
-};
+});
 
 
 module.exports = router;

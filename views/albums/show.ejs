@@ -1,0 +1,17 @@
+<%- include ("../partials/header.ejs") %>
+
+
+<div class="container">
+	<a href="/users/<%= currentUser_id %>/albums">Back to Albums</a>
+<div class="card-columns">
+	<% images.forEach(function(image){ %>
+  <div class="card">
+    <img src="<%= image.location %>" class="card-img-top img-responsive" alt="...">
+  </div>
+  <% }) %>
+</div>
+	<hr>
+
+</div>
+
+<%- include ("../partials/footer.ejs") %>

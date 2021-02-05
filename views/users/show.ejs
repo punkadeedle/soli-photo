@@ -1,0 +1,14 @@
+<%- include ("../partials/header.ejs") %>
+
+<div class="container">
+    <p>Name: <%= currentUser.firstName%> <%= currentUser.lastName %></p>
+    <p></p>
+    <p>Email: <%= currentUser.email %></p>
+    <p>Role: <%= currentUser.role %></p>
+    <a class="btn btn-primary" href="/users/<%= currentUser._id %>/edit">Edit Profile</a>
+    <form style="display: inline" class="pull-right" action="/users/<%=currentUser._id%>?_method=DELETE" method="POST">
+        <button class="btn btn-xs btn-danger">Delete Account</button>
+    </form>
+</div>
+
+<%- include ("../partials/footer.ejs") %>

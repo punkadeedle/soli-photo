@@ -13,6 +13,10 @@ body {
 	padding-bottom: 2.5rem;    /* Footer height */
 }
 
+.contentList:empty::after {
+  content: attr(placeholder);
+}
+
 img {
 width: 100%;
 	height: auto;

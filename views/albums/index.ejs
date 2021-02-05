@@ -1,0 +1,25 @@
+<%- include ("../partials/header.ejs") %>
+
+
+<div class="container">
+	<a class="btn btn-success btn-lg" href="/users/<%= currentUser_id %>/albums/new">+Add Album</a>
+	<% if(albums.length===0){ %>
+		<p><em>No albums yet</em></p>
+	<% } %>
+<hr>
+	<% albums.forEach(function(album){ %>
+
+	<div class="card" style="width: 18rem;">
+		<img src="/images/original-scenery3.jpeg" class="card-img-top" alt="...">
+		<div class="card-body">
+			<h5 class="card-title"><%= album.name %></h5>
+			<a href="/users/<%= currentUser_id %>/album/<%= album._id %>" class="btn btn-primary">View</a>
+		</div>
+
+	</div>
+	<% }); %>
+
+	
+</div>
+
+<%- include ("../partials/footer.ejs") %>

@@ -15,8 +15,6 @@ var express 		= require("express"),
 	flash 			= require("connect-flash"),
 	nodemailer		= require("nodemailer")
 
-var indexRoutes 	= require("./routes/index")
-
 app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine", "ejs");
 app.set('views', path.join(__dirname, 'views'));
@@ -25,12 +23,16 @@ app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
 
- //seed the database
+var indexRoutes 	= require("./routes/index"),
+	userRoutes 		= require("./routes/users"),
+	albumRoutes 	= require("./routes/albums"),
+	imageRoutes 	= require("./routes/images"),
+	purchaseRoutes 	= require("./routes/purchases");
 
 mongoose.Promise = global.Promise;
 //mongoose.set('useUnifiedTopology', true);
 //mongoose.connect("mongodb://localhost/jb_photo", {useNewUrlParser: true});
-mongoose.connect("mongodb+srv://"+process.env.DB_USER+":"+process.env.DB_PASSWORD+"@jbphoto-2h7jx.gcp.mongodb.net/test?retryWrites=true&w=majority")
+mongoose.connect(process.env.DB_URL);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
@@ -65,10 +67,13 @@ app.use(function(req, res, next){
 
 
 app.use("/", indexRoutes);
+app.use("/users", userRoutes);
+app.use("/users/:id/albums", albumRoutes);
+app.use("/", imageRoutes);
+app.use("/users/:id/purchases", purchaseRoutes);
+
 
 }); // end db open
-
-
 
 
 // ------------------------

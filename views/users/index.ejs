@@ -1,0 +1,30 @@
+<%- include ("../partials/header.ejs") %>
+
+<div class="container" style="display:flex; flex-wrap: wrap;">
+	<table class="table">
+		<thead>
+			<tr>
+				<th></th>
+				<th scope="col">Username</th>
+				<th scope="col">First name</th>
+				<th scope="col">Last name</th>
+				<th scope="col">Email</th>
+				<th scope="col">Role</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% users.forEach(function(user){ %>
+			<tr>
+				<th><i class="fas fa-user-circle"></i></th>
+				<th scope="row"><%= user.username %></th>
+				<td><%= user.firstName %> </td>
+				<td><%= user.lastName %> </td>
+				<td><%= user.email %> </td>
+				<td><%= user.role %></td>
+			</tr>
+			<% }); %>
+		</tbody>
+	</table>
+</div>
+
+<%- include ("../partials/footer.ejs") %>
