@@ -1,4 +1,4 @@
-# Circadian eCalendar
+# Photography Site
 
 ## Overview
 This project was started to continue practice with node.js, created with
